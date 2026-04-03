@@ -1,5 +1,5 @@
 [build-system]
-requires = ["uv_build>=0.8.19,<0.9.0"]
+requires = ["uv_build"]
 build-backend = "uv_build"
 
 [project]
@@ -13,8 +13,7 @@ requires-python = ">=3.12,<3.13"
 readme = "README.md"
 
 dependencies = [
-  "mjlab",
-  "mujoco-warp",
+  "mjlab>=1.2.0",
   "viser>=1.0.16",
   "wandb>=0.23.1",
   "torch",
@@ -27,7 +26,7 @@ dependencies = [
 k1_mjlab = "k1_mjlab.tasks"
 
 [dependency-groups]
-dev = ["pre-commit>=4.1.0", "ipykernel>=6.29.5"]
+dev = ["ipykernel", "ipywidgets", "pre-commit"]
 
 [project.scripts]
 k1_mjlab = "k1_mjlab:main"
@@ -36,26 +35,16 @@ k1_record = "k1_mjlab.scripts.record:main"
 k1_play = "k1_mjlab.scripts.play:main"
 k1_list_envs = "k1_mjlab.scripts.list_envs:main"
 
+[tool.uv]
+environments = ["sys_platform == 'linux' or sys_platform == 'win32'"]
+
 [tool.uv.sources]
-mjlab = { git = "https://github.com/mujocolab/mjlab.git", branch = "main" }
-mujoco-warp = { git = "https://github.com/google-deepmind/mujoco_warp", rev = "4ce1c3e9fd635f6589f8b91b2cfba1739cba01a3" }
-torch = [
-  { index = "pytorch-cuda", marker = "sys_platform == 'linux' or sys_platform == 'win32'" },
-]
-torchaudio = [
-  { index = "pytorch-cuda", marker = "sys_platform == 'linux' or sys_platform == 'win32'" },
-]
-torchvision = [
-  { index = "pytorch-cuda", marker = "sys_platform == 'linux' or sys_platform == 'win32'" },
-]
-triton = [
-  { index = "pytorch-cuda", marker = "sys_platform == 'linux' or sys_platform == 'win32'" },
-]
+torch = { index = "pytorch-cu130" }
+torchvision = { index = "pytorch-cu130" }
+torchaudio = { index = "pytorch-cu130" }
+triton = { index = "pytorch-cu130" }
 
 [[tool.uv.index]]
-name = "pytorch-cuda"
-# Use PyTorch built for NVIDIA Toolkit version 13.0.
-# Available versions: https://pytorch.org/get-started/locally/
+name = "pytorch-cu130"
 url = "https://download.pytorch.org/whl/cu130"
-# Only use this index when explicitly requested by `tool.uv.sources`.
 explicit = true
