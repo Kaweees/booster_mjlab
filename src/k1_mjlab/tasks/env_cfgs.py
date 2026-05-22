@@ -4,7 +4,7 @@ from mjlab.envs import ManagerBasedRlEnvCfg
 from mjlab.sensor import ContactMatch, ContactSensorCfg
 from mjlab.tasks.velocity.velocity_env_cfg import make_velocity_env_cfg
 
-from k1_mjlab.robot.k1_constants import (
+from k1_mjlab.robots import (
     get_k1_robot_cfg,
 )
 
