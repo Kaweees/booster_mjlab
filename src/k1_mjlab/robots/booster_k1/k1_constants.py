@@ -3,7 +3,7 @@
 from pathlib import Path
 
 import mujoco
-from mjlab.actuator import XmlPositionActuatorCfg
+from mjlab.actuator import BuiltinPositionActuatorCfg
 from mjlab.entity import EntityArticulationInfoCfg, EntityCfg
 from mjlab.utils.os import update_assets
 from mjlab.utils.spec_config import CollisionCfg
@@ -87,33 +87,71 @@ FEET_ONLY_COLLISION = CollisionCfg(
 )
 
 ##
+# Actuator config.
+##
+
+# kp/kv are uniform across all K1 joints; effort limits vary by motor tier
+# (matches actuatorfrcrange in k1.xml).
+_K1_KP = 75.0
+_K1_KV = 5.0
+_K1_ARMATURE = 0.005
+_K1_FRICTIONLOSS = 0.1
+
+K1_ACTUATOR_HEAD = BuiltinPositionActuatorCfg(
+    target_names_expr=(r"Head_(Yaw|Pitch)",),
+    stiffness=_K1_KP,
+    damping=_K1_KV,
+    effort_limit=7.0,
+    armature=_K1_ARMATURE,
+    frictionloss=_K1_FRICTIONLOSS,
+)
+K1_ACTUATOR_ARM = BuiltinPositionActuatorCfg(
+    target_names_expr=(
+        r"(Left|Right)_Shoulder_(Pitch|Roll)",
+        r"(Left|Right)_Elbow_(Pitch|Yaw)",
+    ),
+    stiffness=_K1_KP,
+    damping=_K1_KV,
+    effort_limit=10.0,
+    armature=_K1_ARMATURE,
+    frictionloss=_K1_FRICTIONLOSS,
+)
+K1_ACTUATOR_ANKLE = BuiltinPositionActuatorCfg(
+    target_names_expr=(r"(Left|Right)_Ankle_(Pitch|Roll)",),
+    stiffness=_K1_KP,
+    damping=_K1_KV,
+    effort_limit=20.0,
+    armature=_K1_ARMATURE,
+    frictionloss=_K1_FRICTIONLOSS,
+)
+K1_ACTUATOR_HIP_ROLL_YAW = BuiltinPositionActuatorCfg(
+    target_names_expr=(r"(Left|Right)_Hip_(Roll|Yaw)",),
+    stiffness=_K1_KP,
+    damping=_K1_KV,
+    effort_limit=30.0,
+    armature=_K1_ARMATURE,
+    frictionloss=_K1_FRICTIONLOSS,
+)
+K1_ACTUATOR_LEG = BuiltinPositionActuatorCfg(
+    target_names_expr=(r"(Left|Right)_(Hip_Pitch|Knee_Pitch)",),
+    stiffness=_K1_KP,
+    damping=_K1_KV,
+    effort_limit=45.0,
+    armature=_K1_ARMATURE,
+    frictionloss=_K1_FRICTIONLOSS,
+)
+
+##
 # Articulation config.
 ##
 
 K1_ARTICULATION = EntityArticulationInfoCfg(
     actuators=(
-        XmlPositionActuatorCfg(target_names_expr=("Head_Yaw",)),
-        XmlPositionActuatorCfg(target_names_expr=("Head_Pitch",)),
-        XmlPositionActuatorCfg(target_names_expr=("Left_Shoulder_Pitch",)),
-        XmlPositionActuatorCfg(target_names_expr=("Left_Shoulder_Roll",)),
-        XmlPositionActuatorCfg(target_names_expr=("Left_Elbow_Pitch",)),
-        XmlPositionActuatorCfg(target_names_expr=("Left_Elbow_Yaw",)),
-        XmlPositionActuatorCfg(target_names_expr=("Right_Shoulder_Pitch",)),
-        XmlPositionActuatorCfg(target_names_expr=("Right_Shoulder_Roll",)),
-        XmlPositionActuatorCfg(target_names_expr=("Right_Elbow_Pitch",)),
-        XmlPositionActuatorCfg(target_names_expr=("Right_Elbow_Yaw",)),
-        XmlPositionActuatorCfg(target_names_expr=("Left_Hip_Pitch",)),
-        XmlPositionActuatorCfg(target_names_expr=("Left_Hip_Roll",)),
-        XmlPositionActuatorCfg(target_names_expr=("Left_Hip_Yaw",)),
-        XmlPositionActuatorCfg(target_names_expr=("Left_Knee_Pitch",)),
-        XmlPositionActuatorCfg(target_names_expr=("Left_Ankle_Pitch",)),
-        XmlPositionActuatorCfg(target_names_expr=("Left_Ankle_Roll",)),
-        XmlPositionActuatorCfg(target_names_expr=("Right_Hip_Pitch",)),
-        XmlPositionActuatorCfg(target_names_expr=("Right_Hip_Roll",)),
-        XmlPositionActuatorCfg(target_names_expr=("Right_Hip_Yaw",)),
-        XmlPositionActuatorCfg(target_names_expr=("Right_Knee_Pitch",)),
-        XmlPositionActuatorCfg(target_names_expr=("Right_Ankle_Pitch",)),
-        XmlPositionActuatorCfg(target_names_expr=("Right_Ankle_Roll",)),
+        K1_ACTUATOR_HEAD,
+        K1_ACTUATOR_ARM,
+        K1_ACTUATOR_ANKLE,
+        K1_ACTUATOR_HIP_ROLL_YAW,
+        K1_ACTUATOR_LEG,
     ),
 )
 
@@ -134,6 +172,16 @@ def get_k1_robot_cfg() -> EntityCfg:
         spec_fn=get_spec,
         articulation=K1_ARTICULATION,
     )
+
+
+K1_ACTION_SCALE: dict[str, float] = {}
+for a in K1_ARTICULATION.actuators:
+    assert isinstance(a, BuiltinPositionActuatorCfg)
+    e = a.effort_limit
+    s = a.stiffness
+    assert e is not None
+    for n in a.target_names_expr:
+        K1_ACTION_SCALE[n] = 0.25 * e / s
 
 
 if __name__ == "__main__":
