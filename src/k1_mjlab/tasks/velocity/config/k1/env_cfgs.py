@@ -65,7 +65,7 @@ def booster_k1_rough_env_cfg(play: bool = False) -> ManagerBasedRlEnvCfg:
     cfg.rewards["pose"].params["std_standing"] = {".*": 0.05}
     # Moderate leg freedom for stepping, loose arms for natural pendulum swing.
     cfg.rewards["pose"].params["std_walking"] = {
-        # Head
+        # Head.
         r".*Head.*": 0.1,
         # Lower body.
         r".*Hip_Pitch.*": 0.3,
@@ -81,7 +81,7 @@ def booster_k1_rough_env_cfg(play: bool = False) -> ManagerBasedRlEnvCfg:
     }
     # Maximum freedom for dynamic motion.
     cfg.rewards["pose"].params["std_running"] = {
-        # Head
+        # Head.
         r".*Head.*": 0.1,
         # Lower body.
         r".*Hip_Pitch.*": 0.5,
