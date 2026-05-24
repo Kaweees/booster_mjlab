@@ -61,7 +61,7 @@ _foot_regex = r"^(left|right)_foot_collision$"
 # Self-collisions are given condim=1 while foot collisions are given condim=3.
 FULL_COLLISION = CollisionCfg(
     geom_names_expr=[".*_collision"],
-    condim={".*_collision": 3},
+    condim={_foot_regex: 3, ".*_collision": 1},
     priority={_foot_regex: 1},
     friction={_foot_regex: (0.6,)},
 )
@@ -70,7 +70,7 @@ FULL_COLLISION_WITHOUT_SELF = CollisionCfg(
     geom_names_expr=[".*_collision"],
     contype=0,
     conaffinity=0,
-    condim={".*_collision": 3},
+    condim={_foot_regex: 3, ".*_collision": 1},
     priority={_foot_regex: 1},
     friction={_foot_regex: (0.6,)},
 )
@@ -153,6 +153,7 @@ K1_ARTICULATION = EntityArticulationInfoCfg(
         K1_ACTUATOR_HIP_ROLL_YAW,
         K1_ACTUATOR_LEG,
     ),
+    soft_joint_pos_limit_factor=0.9,
 )
 
 ##
