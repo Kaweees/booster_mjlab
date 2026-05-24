@@ -9,11 +9,11 @@ just tensorboard
 ```
 
 ```sh
-just run k1_train Mjlab-Velocity-Rough-Booster-K1 --env.scene.num-envs 4096 --agent.max-iterations 30000 --video True --video-length 200 --video-interval 500 --agent.logger tensorboard
+just run k1_train Mjlab-Velocity-Rough-Booster-K1 --env.scene.num-envs 4096 --video True --video-length 200 --video-interval 500 --agent.logger tensorboard
 ```
 
 ```sh
-just run k1_train Mjlab-Velocity-Flat-Booster-K1 --env.scene.num-envs 4096 --agent.max-iterations 30000 --video True ---video-length 200 --video-interval 500 --agent.logger tensorboard
+just run k1_train Mjlab-Velocity-Flat-Booster-K1 --env.scene.num-envs 4096 --video True ---video-length 200 --video-interval 500 --agent.logger tensorboard
 ```
 
 ```sh
