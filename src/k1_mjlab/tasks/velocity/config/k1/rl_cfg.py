@@ -7,7 +7,9 @@ from mjlab.rl import (
 )
 
 
-def booster_k1_ppo_runner_cfg() -> RslRlOnPolicyRunnerCfg:
+def booster_k1_ppo_runner_cfg(
+    experiment_name: str = "k1_velocity",
+) -> RslRlOnPolicyRunnerCfg:
     """Create RL runner configuration for Booster K1 velocity task."""
     return RslRlOnPolicyRunnerCfg(
         actor=RslRlModelCfg(
@@ -39,7 +41,7 @@ def booster_k1_ppo_runner_cfg() -> RslRlOnPolicyRunnerCfg:
             desired_kl=0.01,
             max_grad_norm=1.0,
         ),
-        experiment_name="k1_velocity",
+        experiment_name=experiment_name,
         save_interval=50,
         num_steps_per_env=24,
         max_iterations=30_000,

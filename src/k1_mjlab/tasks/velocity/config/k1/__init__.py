@@ -11,7 +11,7 @@ register_mjlab_task(
     task_id="Mjlab-Velocity-Rough-Booster-K1",
     env_cfg=booster_k1_rough_env_cfg(),
     play_env_cfg=booster_k1_rough_env_cfg(play=True),
-    rl_cfg=booster_k1_ppo_runner_cfg(),
+    rl_cfg=booster_k1_ppo_runner_cfg(experiment_name="k1_velocity_rough"),
     runner_cls=VelocityOnPolicyRunner,
 )
 
@@ -19,6 +19,6 @@ register_mjlab_task(
     task_id="Mjlab-Velocity-Flat-Booster-K1",
     env_cfg=booster_k1_flat_env_cfg(),
     play_env_cfg=booster_k1_flat_env_cfg(play=True),
-    rl_cfg=booster_k1_ppo_runner_cfg(),
+    rl_cfg=booster_k1_ppo_runner_cfg(experiment_name="k1_velocity_flat"),
     runner_cls=VelocityOnPolicyRunner,
 )
