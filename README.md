@@ -25,3 +25,10 @@ just run k1_play Mjlab-Velocity-Rough-Booster-K1 --checkpoint-file [path-to-chec
 
 just run k1_play Mjlab-Velocity-Flat-Booster-K1 --checkpoint-file [path-to-checkpoint] --video True --video-length 200
 ```
+
+  ### Available Tasks
+  
+  | Task ID | Robot | Description | Preview |
+  | --- | --- | --- | --- |
+  | `Mjlab-Velocity-Rough-Booster-K1` | Booster T1 | Velocity tracking on rough terrain | <img alt="Velocity tracking on rough terrain preview" src="assets/gifs/velocity_rough_booster_teaser.gif" width="200"> |
+  | `Mjlab-Velocity-Flat-Booster-K1` | Booster T1 | Velocity tracking on flat terrain | <img alt="Velocity tracking on flat terrain preview" src="assets/gifs/velocity_flat_booster_teaser.gif" width="200"> |
