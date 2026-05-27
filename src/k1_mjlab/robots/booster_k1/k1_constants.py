@@ -90,19 +90,17 @@ FEET_ONLY_COLLISION = CollisionCfg(
 # Actuator config.
 ##
 
-# kp/kv are uniform across all K1 joints; effort limits vary by motor tier
-# (matches actuatorfrcrange in k1.xml).
+# kp/kv are uniform across all K1 joints; effort limits and armatures vary by motor tier.
 _K1_KP = 75.0
 _K1_KV = 5.0
-_K1_ARMATURE = 0.005
 _K1_FRICTIONLOSS = 0.1
 
 K1_ACTUATOR_HEAD = BuiltinPositionActuatorCfg(
     target_names_expr=(r"Head_(Yaw|Pitch)",),
     stiffness=_K1_KP,
     damping=_K1_KV,
-    effort_limit=7.0,
-    armature=_K1_ARMATURE,
+    effort_limit=6.0,
+    armature=0.002,
     frictionloss=_K1_FRICTIONLOSS,
 )
 K1_ACTUATOR_ARM = BuiltinPositionActuatorCfg(
@@ -112,8 +110,8 @@ K1_ACTUATOR_ARM = BuiltinPositionActuatorCfg(
     ),
     stiffness=_K1_KP,
     damping=_K1_KV,
-    effort_limit=10.0,
-    armature=_K1_ARMATURE,
+    effort_limit=14.0,
+    armature=0.001,
     frictionloss=_K1_FRICTIONLOSS,
 )
 K1_ACTUATOR_ANKLE = BuiltinPositionActuatorCfg(
@@ -121,23 +119,39 @@ K1_ACTUATOR_ANKLE = BuiltinPositionActuatorCfg(
     stiffness=_K1_KP,
     damping=_K1_KV,
     effort_limit=20.0,
-    armature=_K1_ARMATURE,
+    armature=0.0565,
     frictionloss=_K1_FRICTIONLOSS,
 )
-K1_ACTUATOR_HIP_ROLL_YAW = BuiltinPositionActuatorCfg(
-    target_names_expr=(r"(Left|Right)_Hip_(Roll|Yaw)",),
+K1_ACTUATOR_HIP_PITCH = BuiltinPositionActuatorCfg(
+    target_names_expr=(r"(Left|Right)_Hip_Pitch",),
     stiffness=_K1_KP,
     damping=_K1_KV,
     effort_limit=30.0,
-    armature=_K1_ARMATURE,
+    armature=0.0478125,
     frictionloss=_K1_FRICTIONLOSS,
 )
-K1_ACTUATOR_LEG = BuiltinPositionActuatorCfg(
-    target_names_expr=(r"(Left|Right)_(Hip_Pitch|Knee_Pitch)",),
+K1_ACTUATOR_HIP_ROLL = BuiltinPositionActuatorCfg(
+    target_names_expr=(r"(Left|Right)_Hip_Roll",),
     stiffness=_K1_KP,
     damping=_K1_KV,
-    effort_limit=45.0,
-    armature=_K1_ARMATURE,
+    effort_limit=35.0,
+    armature=0.0339552,
+    frictionloss=_K1_FRICTIONLOSS,
+)
+K1_ACTUATOR_HIP_YAW = BuiltinPositionActuatorCfg(
+    target_names_expr=(r"(Left|Right)_Hip_Yaw",),
+    stiffness=_K1_KP,
+    damping=_K1_KV,
+    effort_limit=20.0,
+    armature=0.0282528,
+    frictionloss=_K1_FRICTIONLOSS,
+)
+K1_ACTUATOR_KNEE = BuiltinPositionActuatorCfg(
+    target_names_expr=(r"(Left|Right)_Knee_Pitch",),
+    stiffness=_K1_KP,
+    damping=_K1_KV,
+    effort_limit=40.0,
+    armature=0.095625,
     frictionloss=_K1_FRICTIONLOSS,
 )
 
@@ -150,8 +164,10 @@ K1_ARTICULATION = EntityArticulationInfoCfg(
         K1_ACTUATOR_HEAD,
         K1_ACTUATOR_ARM,
         K1_ACTUATOR_ANKLE,
-        K1_ACTUATOR_HIP_ROLL_YAW,
-        K1_ACTUATOR_LEG,
+        K1_ACTUATOR_HIP_PITCH,
+        K1_ACTUATOR_HIP_ROLL,
+        K1_ACTUATOR_HIP_YAW,
+        K1_ACTUATOR_KNEE,
     ),
     soft_joint_pos_limit_factor=0.9,
 )
