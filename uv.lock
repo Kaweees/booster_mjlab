@@ -712,8 +712,8 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "mjlab", specifier = "==1.2.0" },
-    { name = "mujoco", specifier = ">=3.5,<3.8" },
+    { name = "mjlab", specifier = "==1.4.0" },
+    { name = "mujoco", specifier = ">=3.8,<3.9" },
     { name = "scipy", specifier = ">=1.17.1" },
 ]
 
@@ -846,16 +846,18 @@ wheels = [
 
 [[package]]
 name = "mjlab"
-version = "1.2.0"
+version = "1.4.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "imageio-ffmpeg", marker = "sys_platform == 'linux' or sys_platform == 'win32'" },
     { name = "mediapy", marker = "sys_platform == 'linux' or sys_platform == 'win32'" },
+    { name = "mjviser", marker = "sys_platform == 'linux' or sys_platform == 'win32'" },
     { name = "mujoco", marker = "sys_platform == 'linux' or sys_platform == 'win32'" },
     { name = "mujoco-warp", marker = "sys_platform == 'linux' or sys_platform == 'win32'" },
     { name = "onnxscript", marker = "sys_platform == 'linux' or sys_platform == 'win32'" },
     { name = "prettytable", marker = "sys_platform == 'linux' or sys_platform == 'win32'" },
     { name = "rsl-rl-lib", marker = "sys_platform == 'linux' or sys_platform == 'win32'" },
+    { name = "scipy", marker = "sys_platform == 'linux' or sys_platform == 'win32'" },
     { name = "tensorboard", marker = "sys_platform == 'linux' or sys_platform == 'win32'" },
     { name = "tensordict", marker = "sys_platform == 'linux' or sys_platform == 'win32'" },
     { name = "torch", marker = "sys_platform == 'linux' or sys_platform == 'win32'" },
@@ -867,9 +869,25 @@ dependencies = [
     { name = "wandb", marker = "sys_platform == 'linux' or sys_platform == 'win32'" },
     { name = "warp-lang", marker = "sys_platform == 'linux' or sys_platform == 'win32'" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/32/66/b8df336a1adc8ad177478048f581234ac1a209928843f29c1185f6078200/mjlab-1.2.0.tar.gz", hash = "sha256:c41cf754af4a56ffbb355a83bd1a9de3900d91d514a0b184d9f0ce79e79a1ae0", size = 14053423, upload-time = "2026-03-06T22:03:03.335Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/9e/81/55bb4e7b48137fe834be4d8eda6692c36c9c2e48e29b2456aea7210bd6ab/mjlab-1.4.0.tar.gz", hash = "sha256:eeb3297d7ee90ad5912552ef48294d2dfa9de5aec73cf4b9df05544adbcddd62", size = 14097091, upload-time = "2026-05-26T22:25:22.226Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/85/9a/9a54101887cd3ade9c766adc668138a827f33c237bb4d5752c5a56fd1297/mjlab-1.2.0-py3-none-any.whl", hash = "sha256:2b2fdbce0ddb8920ed550777f3ed8c266ee1bd2daeef9b936ba8e0423e5e2e13", size = 14139534, upload-time = "2026-03-06T22:03:06.775Z" },
+    { url = "https://files.pythonhosted.org/packages/4b/42/d7501377ebc245aea051d6054a53adc83312f948355d6ffaf09a06113f71/mjlab-1.4.0-py3-none-any.whl", hash = "sha256:fe0ba580857d85bfcdb8cf89c9ec71e3c29c89c744de1bb524e7276eb5cff4bc", size = 14189532, upload-time = "2026-05-26T22:25:25.641Z" },
+]
+
+[[package]]
+name = "mjviser"
+version = "0.0.14"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "mujoco", marker = "sys_platform == 'linux' or sys_platform == 'win32'" },
+    { name = "numpy", marker = "sys_platform == 'linux' or sys_platform == 'win32'" },
+    { name = "pillow", marker = "sys_platform == 'linux' or sys_platform == 'win32'" },
+    { name = "trimesh", marker = "sys_platform == 'linux' or sys_platform == 'win32'" },
+    { name = "viser", marker = "sys_platform == 'linux' or sys_platform == 'win32'" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/1d/e4/eef89b279fb1811b5f120a99ac9284c32ff2ca4fad5e6f5c93035f72ba9a/mjviser-0.0.14.tar.gz", hash = "sha256:ebde2203dab89959a13ae549b4d3e5e5cf9eb69de11a1a2fd759cbe8f8c641f3", size = 29576, upload-time = "2026-05-07T03:35:13.128Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/9c/c2/4534d678ad1b3f7dee6fd83110112800287be21ba007d988abb9ddc8e0ac/mjviser-0.0.14-py3-none-any.whl", hash = "sha256:4b09f8e90506fc4a71d76fc628872147157947e9292428213ab78cfe137c9a26", size = 32296, upload-time = "2026-05-07T03:35:14.252Z" },
 ]
 
 [[package]]
@@ -912,7 +930,7 @@ wheels = [
 
 [[package]]
 name = "mujoco"
-version = "3.7.0"
+version = "3.8.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "absl-py", marker = "sys_platform == 'linux' or sys_platform == 'win32'" },
@@ -921,16 +939,16 @@ dependencies = [
     { name = "numpy", marker = "sys_platform == 'linux' or sys_platform == 'win32'" },
     { name = "pyopengl", marker = "sys_platform == 'linux' or sys_platform == 'win32'" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/49/6e/9cba0cf43410aee5123ed670ce6e57f901974cc6a59093ce49200494b604/mujoco-3.7.0.tar.gz", hash = "sha256:d325c5448702a919db5b3d0050fff0af86d47da146d59678722b2112f7b55084", size = 917551, upload-time = "2026-04-14T12:50:31.331Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/ff/ba/ad135f7a4a71360072bc4f202f7ab3130d7d7827cff70ce3e1b382a1a410/mujoco-3.8.1.tar.gz", hash = "sha256:019a0b3406892bc98454eaf55cbd27f85d167758ad785f77c608a61f3a34ad17", size = 922269, upload-time = "2026-05-11T13:44:01.357Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/b8/4d/a92e635cf1d38140c04fd504d07bacfd5d814753449fa75f3e7187660adb/mujoco-3.7.0-cp312-cp312-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:5a7216abee4fafe4bd6121548cb22dcacdb27f466da2f645bd9cbc404c0a29c9", size = 6709175, upload-time = "2026-04-14T12:50:13.188Z" },
-    { url = "https://files.pythonhosted.org/packages/97/fa/a8698b7bb0168483845f8e492991ee5cf01695eb0d1f20ea7d8bf3d61344/mujoco-3.7.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:79f741d93e2b4f315f32e7199ab1b21eb7b7ed82acd9daf7be24382e436f98b7", size = 7201272, upload-time = "2026-04-14T12:50:15.264Z" },
-    { url = "https://files.pythonhosted.org/packages/32/b9/96a06d51d1b8a13ce010642c5e9a1b83b2364d6c290c2aba2d8c515f9871/mujoco-3.7.0-cp312-cp312-win_amd64.whl", hash = "sha256:b0e31da299ff182d1063f9991ad21c21a8b086593b8dee588d19e910f2e49833", size = 5757244, upload-time = "2026-04-14T12:50:17.562Z" },
+    { url = "https://files.pythonhosted.org/packages/09/a1/597263af3519b1ac1c09bb8fc8f8985e90e4990c8aff62ca1a0c035e824c/mujoco-3.8.1-cp312-cp312-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:9e4e951de3ab2ba5187b4807c648ac551fd6ae27ff04c7e25304b357d35d7fe8", size = 6784316, upload-time = "2026-05-11T13:43:34.837Z" },
+    { url = "https://files.pythonhosted.org/packages/0e/2f/8a911be3ed84436bc46b5bdcf4ead6ac9590d0ddc82c006834c49ffd60c4/mujoco-3.8.1-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:2970c90913a52b31eade56f27e5439905f08f1479e7991e257144ca829fa1267", size = 7322546, upload-time = "2026-05-11T13:43:37.074Z" },
+    { url = "https://files.pythonhosted.org/packages/83/58/d580c4abf7dda5231fed0886a626e1815e40c2d118bf7d0052a617435d6e/mujoco-3.8.1-cp312-cp312-win_amd64.whl", hash = "sha256:496b61c863d544e076990d1601555f71e522eb3b7aaae227dfbc5dea522f88a1", size = 5893327, upload-time = "2026-05-11T13:43:39.022Z" },
 ]
 
 [[package]]
 name = "mujoco-warp"
-version = "3.5.0"
+version = "3.8.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "absl-py", marker = "sys_platform == 'linux' or sys_platform == 'win32'" },
@@ -939,9 +957,9 @@ dependencies = [
     { name = "numpy", marker = "sys_platform == 'linux' or sys_platform == 'win32'" },
     { name = "warp-lang", marker = "sys_platform == 'linux' or sys_platform == 'win32'" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/a0/d9/6651f79dffad6f782cf9cc664f89d1aa0f816a2109bfaae4c79bb972fc8f/mujoco_warp-3.5.0.tar.gz", hash = "sha256:803a86569349e4abf7c7df3bcb2773ad78584c5f674ef56f515a510b9a996b30", size = 1871176, upload-time = "2026-02-13T05:07:10.431Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/19/a1/13004d9a034e9361675c14454b0790ab2bfbdc7695388fa1a1ff16691caa/mujoco_warp-3.8.1.tar.gz", hash = "sha256:d7a66c7e5f69b10de67d31cbfd9464b49e06b2ca142a061dd9cd79c84bc21462", size = 1938856, upload-time = "2026-05-11T14:38:39.976Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/a6/87/754427687c0cb2ee987c2e3ca2645ec12e0123f181140e49f255c677aebb/mujoco_warp-3.5.0-py3-none-any.whl", hash = "sha256:7aa1c5dadbc175dd24e5f60f6a10f27a3154929a4bffd89e3eea3eebf39c6097", size = 1945429, upload-time = "2026-02-13T05:07:07.818Z" },
+    { url = "https://files.pythonhosted.org/packages/16/52/82ebe6ffde3bcaa341109d9fcf80dfc7c12a15706188b60b67d4be60b2d7/mujoco_warp-3.8.1-py3-none-any.whl", hash = "sha256:6aef7339ba3a8bf8e69659172d2d770169096e3a341f6b5b8a909b383c2581a2", size = 2019871, upload-time = "2026-05-11T14:38:37.757Z" },
 ]
 
 [[package]]
@@ -1567,7 +1585,7 @@ wheels = [
 
 [[package]]
 name = "rsl-rl-lib"
-version = "5.0.1"
+version = "5.2.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "gitpython", marker = "sys_platform == 'linux' or sys_platform == 'win32'" },
@@ -1578,9 +1596,9 @@ dependencies = [
     { name = "torch", marker = "sys_platform == 'linux' or sys_platform == 'win32'" },
     { name = "torchvision", marker = "sys_platform == 'linux' or sys_platform == 'win32'" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/d5/23/dae404688e571e73662b7754ab2a8bddcc48f625c338b7f55576ad528653/rsl_rl_lib-5.0.1.tar.gz", hash = "sha256:b6e1fce8f4481c6118d53c7b03b80c8070d0a1edd3df3efbec5e5e6ff7c92132", size = 58623, upload-time = "2026-03-04T08:19:49.671Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/d7/a8/fb9aae0573a83dd510e228085f5e6ff9076a91f2bff6699270f07d31854c/rsl_rl_lib-5.2.0.tar.gz", hash = "sha256:cbb4eee96af9574495208381115d45d68ad1c0403710a2bc6512a2ee5bf57124", size = 60558, upload-time = "2026-04-23T12:40:54.259Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/ad/25/293a8ffd929d40accab30057b962084601133bd8a6779c156c2f58eb93bc/rsl_rl_lib-5.0.1-py3-none-any.whl", hash = "sha256:2f71a4f753537faf7826d0b74815160e37c409b39ab80a4581524b7ef7bd8539", size = 84202, upload-time = "2026-03-04T08:19:48.044Z" },
+    { url = "https://files.pythonhosted.org/packages/7e/3a/3e8f39049cc5a8994bfdb2dd09d727f90a2781b9755adf59e49fa509500e/rsl_rl_lib-5.2.0-py3-none-any.whl", hash = "sha256:fc767059f329a184527dd10766c3382354f6deca4b049f23febc8140c3dc6029", size = 86451, upload-time = "2026-04-23T12:40:52.762Z" },
 ]
 
 [[package]]
