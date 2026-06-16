@@ -5,7 +5,6 @@ from pathlib import Path
 import mujoco
 from mjlab.actuator import BuiltinPositionActuatorCfg
 from mjlab.entity import EntityArticulationInfoCfg, EntityCfg
-from mjlab.utils.os import update_assets
 from mjlab.utils.spec_config import CollisionCfg
 
 ##
@@ -17,16 +16,8 @@ T1_XML: Path = Path(__file__).parent / "xmls" / "t1.xml"
 assert T1_XML.exists(), f"T1 robot XML not found at {T1_XML}"
 
 
-def get_assets(meshdir: str) -> dict[str, bytes]:
-    assets: dict[str, bytes] = {}
-    update_assets(assets, T1_XML.parent / "assets", meshdir)
-    return assets
-
-
 def get_spec() -> mujoco.MjSpec:
-    spec = mujoco.MjSpec.from_file(str(T1_XML))
-    spec.assets = get_assets(spec.meshdir)
-    return spec
+    return mujoco.MjSpec.from_file(str(T1_XML))
 
 
 ##
