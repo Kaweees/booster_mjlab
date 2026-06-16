@@ -3,15 +3,10 @@
 # run `just` from this directory to see available commands
 
 alias i := install
-alias u := update
 alias p := pre_commit
-alias b := build
 alias r := run
 alias t := tensorboard
-alias w := wandb
-alias ch := check
 alias c := clean
-alias f := format
 
 # Default command when 'just' is run without arguments
 default:
@@ -20,23 +15,14 @@ default:
 # Install the virtual environment and pre-commit hooks
 install:
   @echo "Installing..."
-  @uv sync
+  @uv sync --refresh
   @uv run pre-commit install --install-hooks
-
-update:
-  @echo "Updating..."
-  @uv sync --upgrade
-  @uv run pre-commit autoupdate
 
 # Run pre-commit
 pre_commit:
   @echo "Running pre-commit..."
   @uv run pre-commit run -a
-
-# Build the project
-build target:
-  @echo "Building..."
-  @uv run hatch build --target {{target}}
+  @find . -name "*.nix" -type f -exec nixfmt {} \;
 
 # Run a package
 run package="" *args="":
@@ -48,24 +34,6 @@ tensorboard logdir="./logs/rsl_rl/":
   @echo "Running tensorboard..."
   @uv run tensorboard --logdir {{logdir}}
 
-# Run wandb
-wandb logdir="./wandb/latest-run/":
-  @echo "Running wandb..."
-  @uv run wandb beta leet {{logdir}}
-
-# Run web server
-web:
-  @echo "Running web server..."
-  @uv run viser-build-client --out-dir public/viser-client
-  @mkdir -p ./public/recordings/
-  @find ./recordings -name "*.viser" -exec cp {} ./public/recordings/ \;
-
-# Run code quality tools
-check:
-  @echo "Checking..."
-  @uv lock --locked
-  @uv run pre-commit run -a
-
 # Remove build artifacts and non-essential files
 clean:
   @echo "Cleaning..."
@@ -76,8 +44,3 @@ clean:
   @find . -type d -name "logs" -exec rm -rf {} +
   @find . -type d -name "viser-client" -exec rm -rf {} +
   @find . -type d -name "wandb" -exec rm -rf {} +
-
-# Format the project
-format:
-  @echo "Formatting..."
-  @find . -name "*.nix" -type f -exec nixfmt {} \;
